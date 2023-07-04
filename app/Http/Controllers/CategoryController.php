@@ -115,14 +115,14 @@ class CategoryController extends Controller
     public function detail(Category $category){
         //Coger todos lo articulos que pertenezcan a la misma categoria y sea publicos
         $articles = Article::where([
-            ['categori_id', $category->id],
+            ['category_id', $category->id],
             ['status', '1'],
         ])
         ->orderBy('id','desc')->simplePaginate(5);
 
         $navbar = Category::where([['status','1'],['is_featured','1']])->paginate(3);
 
-        return view('suscriber.categories.detail', compact('articles', 'category', 'navbar'));
+        return view('subscriber.categories.detail', compact('articles', 'category', 'navbar'));
     }
 }
 
