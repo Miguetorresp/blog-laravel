@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -17,12 +18,12 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 //? Principal
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/all', [HomeController::class, 'all'])->name('home.all');
 
 //? Articles
@@ -58,5 +59,9 @@ Route::resource('comments', CommentController::class)
 //Guardar los comentarios
 Route::get('/comment', [CommentController::class, 'store'])->name('comments.store');
 
+//? Perfiles
+Route::resource('profiles', ProfileController::class)
+    ->only('edit', 'update')
+    ->names('profiles');
 
 Auth::routes();
